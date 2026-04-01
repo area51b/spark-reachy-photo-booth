@@ -2,6 +2,7 @@
 |---------|-------|-----|
 | No audio from robot (low volume) | Reachy speaker volume set too low by default | Increase Reachy speaker volume to maximum |
 | No audio from robot (device conflict) | Another application capturing Reachy speaker | Check `animation-compositor` logs for "Error querying device (-1)", verify Reachy speaker is not set as system default in Ubuntu sound settings, ensure no other apps are capturing the speaker, then restart the demo |
+| Image-generation fails on first start | Transient initialization issue | Rerun `docker compose up --build -d` to resolve the issue |
 
 If you have any issues with Reachy that are not covered by this guide, please read [Hugging Face's official troubleshooting guide](https://huggingface.co/docs/reachy_mini/troubleshooting).
 

@@ -23,7 +23,7 @@ uv sync --all-packages
 Every folder suffixed by `-service` is a standalone Python program that runs in its own container. You must always start the services by interacting with the `docker-compose.yaml` at the root of the repository. You can enable code hot reloading for all the Python services by running:
 
 ```bash
-docker compose up -d --build --watch
+docker compose up --build --watch
 ```
 
 Whenever you change some Python code in the repository the associated container will be updated and automatically restarted.
