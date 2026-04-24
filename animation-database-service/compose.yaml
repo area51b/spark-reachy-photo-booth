@@ -3,6 +3,7 @@
 
 services:
   animation-database:
+    user: "${UID}:${GID}"
     restart: unless-stopped
     container_name: animation-database
     image: animation-database:latest

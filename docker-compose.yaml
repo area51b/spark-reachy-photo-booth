@@ -40,8 +40,8 @@ services:
     environment:
       - NIM_MODEL_PROFILE=bf2a467d95dd394e2f194467869c7952008bd9088f36e0e6984a2bed87a7874f
       - NIM_ALLOW_UNCHECKED_GENERATION=true
-      - NGC_API_KEY=$NVIDIA_API_KEY
-      - HF_TOKEN=$HF_TOKEN
+      - NGC_API_KEY=${NVIDIA_API_KEY}
+      - HF_TOKEN=${HF_TOKEN}
     ports:
       - 9090:8000
     volumes:
@@ -67,7 +67,7 @@ services:
       start_interval: 5s
     environment:
       - NIM_MODEL_PROFILE=e48ada80aead95c5fdcccc3b302d07d406d1d0b25858e4994f3cc34338002572
-      - NGC_API_KEY=$NVIDIA_API_KEY
+      - NGC_API_KEY=${NVIDIA_API_KEY}
       - NIM_HTTP_API_PORT=9000
       - NIM_GRPC_API_PORT=50051
     ports:
@@ -91,7 +91,7 @@ services:
       start_period: 2h
       start_interval: 5s
     ports:
-      - 8500:8000
+      - 8501:8000
     environment:
       - UVICORN_HOST=0.0.0.0
       - MODEL_HANDLE=openai/gpt-oss-20b
