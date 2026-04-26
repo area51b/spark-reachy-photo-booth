@@ -3,7 +3,6 @@
 
 import json
 import logging
-import random
 
 from langchain.prompts import ChatPromptTemplate
 from nat.agent.react_agent.register import ReActAgentWorkflowConfig
@@ -130,23 +129,18 @@ async def photo_booth_react_function(
         QUESTION_BLOCK_END = "%%QUESTION_BLOCK_END%%"
 
         if config.quick_photo_mode:
-            location = random.choice(config.quick_locations)
-            costume = random.choice(config.quick_costumes)
-            style = random.choice(config.quick_styles)
-            logger.info(
-                f"Quick photo mode enabled - "
-                f"location: {location}, costume: {costume}, style: {style}"
-            )
+            logger.info("Quick photo mode enabled - LLM will select from lists")
 
             quick_mode_patch = f"""
-        QUICK PHOTO MODE IS ENABLED:
-        - DO NOT ask the user any questions about location, costume, or artistic style.
-        - Use the following pre-selected values:
-        * Artistic style: {style}
-        * Background/location: {location}
-        * Outfit/costume: {costume}
-        - Proceed directly to capturing the user with `look_at_human`, then call `generate_image` immediately.
-        - Construct the image generation prompt using the pre-selected values above, following the existing prompt format rules."""
+            QUICK PHOTO MODE IS ENABLED:
+            - DO NOT ask the user any questions about location, costume, or artistic style.
+            - Randomly select ONE option from each list below. Be truly random - avoid always picking the first option:
+            * Artistic style - pick one from: {config.quick_styles}
+            * Background/location - pick one from: {config.quick_locations}
+            * Outfit/costume - pick one from: {config.quick_costumes}
+            - Each interaction should feel different, so vary your selections across the lists.
+            - Proceed directly to capturing the user with `look_at_human`, then call `generate_image` immediately.
+            - Construct the image generation prompt using the selected values, following the existing prompt format rules."""
 
             markers_found = QUESTION_BLOCK_START in prompt and QUESTION_BLOCK_END in prompt
             logger.info(f"Quick mode patch - markers found: {markers_found}")
